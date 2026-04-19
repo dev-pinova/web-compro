@@ -31,7 +31,12 @@ const STATIC_TESTIMONIALS = [
 ];
 
 export default async function KataMerekaPage() {
-  const dbTestimonials = await db.select().from(testimonial).orderBy(desc(testimonial.createdAt));
+  let dbTestimonials: Testimonial[] = [];
+  try {
+    dbTestimonials = await db.select().from(testimonial).orderBy(desc(testimonial.createdAt));
+  } catch (error) {
+    console.warn("Testimonial table not found or error fetching. Skipping for build.");
+  }
   const displayData = dbTestimonials.length > 0 ? dbTestimonials : STATIC_TESTIMONIALS;
 
   return (
