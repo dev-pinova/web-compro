@@ -7,9 +7,14 @@ import Link from "next/link";
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const [inquiryCount] = await db.select({ value: sql<number>`count(*)` }).from(inquiry);
-  const [portfolioCount] = await db.select({ value: sql<number>`count(*)` }).from(portfolio);
-  const [postCount] = await db.select({ value: sql<number>`count(*)` }).from(post);
+  // Use .select().from() and .length for maximum compatibility with Drizzle types
+  const allInquiries = await db.select().from(inquiry);
+  const allPortfolio = await db.select().from(portfolio);
+  const allPosts = await db.select().from(post);
+
+  const inquiryCount = { value: allInquiries.length };
+  const portfolioCount = { value: allPortfolio.length };
+  const postCount = { value: allPosts.length };
 
   const recentInquiries = await db.select().from(inquiry).orderBy(desc(inquiry.createdAt)).limit(5);
 
