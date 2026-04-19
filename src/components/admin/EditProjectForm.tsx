@@ -91,8 +91,8 @@ export function EditProjectForm({ project }: { project: Portfolio }) {
                 <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Lokasi</label>
                 <div className="relative">
                    <Input 
-                    name="location" 
-                    defaultValue={project.location || ""} 
+                  name="location" 
+                  defaultValue={(project as any).location || ""} 
                     placeholder="Solo, Jawa Tengah" 
                     required 
                     className="bg-surface border-white/10 pl-11" 
