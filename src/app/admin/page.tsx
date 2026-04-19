@@ -1,15 +1,15 @@
 import { db } from "@/lib/db";
 import { inquiry, portfolio, post } from "@/lib/db/schema";
-import { count, desc } from "drizzle-orm";
+import { count, desc, sql } from "drizzle-orm";
 import { LayoutDashboard, MessageSquare, ImageIcon, FileText, ArrowUpRight, Clock, User } from "lucide-react";
 import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const [inquiryCount] = await db.select({ value: count() }).from(inquiry);
-  const [portfolioCount] = await db.select({ value: count() }).from(portfolio);
-  const [postCount] = await db.select({ value: count() }).from(post);
+  const [inquiryCount] = await db.select({ value: sql<number>`count(*)` }).from(inquiry);
+  const [portfolioCount] = await db.select({ value: sql<number>`count(*)` }).from(portfolio);
+  const [postCount] = await db.select({ value: sql<number>`count(*)` }).from(post);
 
   const recentInquiries = await db.select().from(inquiry).orderBy(desc(inquiry.createdAt)).limit(5);
 
