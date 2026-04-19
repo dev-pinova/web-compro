@@ -51,7 +51,7 @@ export default async function InquiriesPage() {
             <p className="text-gray-500 text-sm">Belum ada inquiry yang masuk.</p>
           </div>
         ) : (
-          messages.map((msg) => (
+          messages.map((msg: any) => (
             <div key={msg.id} className="bg-secondary-dark/40 border border-white/5 rounded-3xl p-6 hover:bg-secondary-dark/60 transition-all group">
               <div className="flex flex-col lg:flex-row justify-between gap-6">
                 <div className="flex-1 space-y-4">

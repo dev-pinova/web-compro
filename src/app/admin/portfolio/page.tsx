@@ -51,7 +51,7 @@ export default async function AdminPortfolioPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
-              {projects.map((project) => (
+              {projects.map((project: any) => (
                 <tr key={project.id} className="hover:bg-white/[0.02] transition-colors group">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-4">
