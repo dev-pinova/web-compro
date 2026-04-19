@@ -5,8 +5,8 @@ import { post } from '@/lib/db/schema';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://anugrahjayadesain.com'; // Replace with real domain
 
-  // Get all blog posts
-  const posts = await db.select({ slug: post.slug, updatedAt: post.updatedAt }).from(post);
+  // Get all blog posts - using all columns for compatibility
+  const posts = await db.select().from(post);
 
   const blogUrls = posts.map((p) => ({
     url: `${baseUrl}/blog/${p.slug}`,
