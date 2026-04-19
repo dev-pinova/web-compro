@@ -1,34 +1,43 @@
-import { motion } from "framer-motion";
 import { Star, Quote, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import * as motionServer from "framer-motion/dom";
 import { db } from "@/lib/db";
-import { testimonial } from "@/lib/db/schema";
+import { testimonial, type Testimonial } from "@/lib/db/schema";
 import { desc } from "drizzle-orm";
 
-const STATIC_TESTIMONIALS = [
+const STATIC_TESTIMONIALS: Testimonial[] = [
   {
-    id: 1,
+    id: "static-1",
     name: "Drs. H. Mulyadi",
     role: "Pemilik Rumah Pribadi",
     comment: "Pengerjaan sangat profesional dan tepat waktu. Hasil renovasi rumah saya di Solo melampaui ekspektasi. Tim sangat kooperatif dalam mendengarkan setiap detail keinginan keluarga kami.",
-    stars: 5
+    stars: 5,
+    avatarUrl: null,
+    createdAt: Date.now(),
+    updatedAt: Date.now()
   },
   {
-    id: 2,
+    id: "static-2",
     name: "Ibu Ratna Sari",
     role: "Dosen & Ibu Rumah Tangga",
     comment: "Desain interior yang dikerjakan Anugrah Jaya Desain sangat elegan dan fungsional. Sirkulasi udara dan pencahayaan alami dioptimalkan dengan sangat baik sehingga rumah terasa jauh lebih nyaman.",
-    stars: 5
+    stars: 5,
+    avatarUrl: null,
+    createdAt: Date.now(),
+    updatedAt: Date.now()
   },
   {
-    id: 3,
+    id: "static-3",
     name: "Bpk. Tan Wijaya",
     role: "Pengusaha Properti",
     comment: "Sudah beberapa kali bekerja sama untuk proyek ruko dan rumah tinggal. Konsistensi kualitas dan transparansi biaya menjadi alasan utama saya selalu kembali menggunakan jasa tim ini.",
-    stars: 5
+    stars: 5,
+    avatarUrl: null,
+    createdAt: Date.now(),
+    updatedAt: Date.now()
   }
 ];
+
+export const dynamic = "force-dynamic";
 
 export default async function KataMerekaPage() {
   let dbTestimonials: Testimonial[] = [];

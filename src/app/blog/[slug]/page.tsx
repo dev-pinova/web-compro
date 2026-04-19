@@ -5,6 +5,8 @@ import { post } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 import { Metadata } from "next";
 
 interface PageProps {

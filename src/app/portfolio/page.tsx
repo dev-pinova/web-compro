@@ -5,6 +5,8 @@ import { db } from "@/lib/db";
 import { portfolio } from "@/lib/db/schema";
 import { desc } from "drizzle-orm";
 
+export const dynamic = "force-dynamic";
+
 export default async function PortfolioPage() {
   const allProjects = await db.select().from(portfolio).orderBy(desc(portfolio.createdAt));
 
