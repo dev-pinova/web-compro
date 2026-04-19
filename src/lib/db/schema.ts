@@ -59,6 +59,8 @@ export const portfolio = sqliteTable("portfolio", {
   imageUrl: text("image_url").notNull(),
   gallery: text("gallery"), // JSON array of additional image URLs
   description: text("description"),
+  location: text("location"), // Physical location of the project
+  year: text("year"), // Completion year
   createdAt: integer("created_at").notNull().$defaultFn(() => Date.now()),
   updatedAt: integer("updated_at").notNull().$defaultFn(() => Date.now()),
 });
