@@ -12,9 +12,9 @@ const values = [
 ];
 
 const milestones = [
-  { year: "2011", event: "Anugrah Jaya Desain didirikan di Jakarta oleh Toni Anugrah dengan misi menghadirkan arsitektur berkualitas untuk klien individu." },
-  { year: "2015", event: "Ekspansi layanan ke Desain Interior, mengerjakan proyek perdana di kawasan premium Pondok Indah." },
-  { year: "2018", event: "Membuka divisi Konstruksi Sipil dan Renovasi, merampungkan berbagai proyek residensial di Jabodetabek." },
+  { year: "2011", event: "Anugrah Jaya Desain didirikan di Surakarta oleh Toni Anugrah dengan misi menghadirkan arsitektur berkualitas untuk klien individu." },
+  { year: "2015", event: "Ekspansi layanan ke Desain Interior, mengerjakan proyek perdana di kawasan premium Solo Baru." },
+  { year: "2018", event: "Membuka divisi Konstruksi Sipil dan Renovasi, merampungkan berbagai proyek residensial di Surakarta dan Solo Raya." },
   { year: "2023", event: "Melewati tonggak 150 proyek selesai, dengan kepercayaan klien dari berbagai wilayah di Indonesia." },
 ];
 
@@ -160,8 +160,8 @@ export default function VisiMisiPage() {
       {/* Timeline Journey */}
       <section className="py-24 border-t border-white/5">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-primary-gold text-xs font-bold tracking-[0.3em] uppercase mb-4 text-center">Perjalanan Kami</p>
-          <h2 className="text-3xl font-bold text-white mb-16 text-center">Milestones</h2>
+          <p className="text-primary-gold text-xs font-bold tracking-[0.3em] uppercase mb-4 text-center">Dari Kota Surakarta</p>
+          <h2 className="text-3xl font-bold text-white mb-16 text-center">Milestones Perjalanan</h2>
           <div className="relative border-l border-primary-gold/20 ml-4 md:ml-0">
             {milestones.map((m, i) => (
               <motion.div 

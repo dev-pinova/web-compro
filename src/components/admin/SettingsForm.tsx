@@ -33,30 +33,21 @@ export function SettingsForm({ initialData }: { initialData: any }) {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
+  // Form State to persist across tab unmounts
+  const [formData, setFormData] = useState({ ...initialData });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSuccess(false);
     setError("");
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      siteName: formData.get("siteName"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      address: formData.get("address"),
-      whatsapp: formData.get("whatsapp"),
-      siteDescription: formData.get("siteDescription"),
-      keywords: formData.get("keywords"),
-      ogImage: formData.get("ogImage"),
-      instagram: formData.get("instagram"),
-      facebook: formData.get("facebook"),
-      tiktok: formData.get("tiktok"),
-      youtube: formData.get("youtube"),
-      linkedin: formData.get("linkedin"),
-    };
-
-    const result = await updateSettings(data);
+    const result = await updateSettings(formData);
 
     if (result.success) {
       setSuccess(true);
@@ -108,7 +99,7 @@ export function SettingsForm({ initialData }: { initialData: any }) {
                   <label className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-2">
                     <Type className="w-3 h-3" /> Nama Perusahaan
                   </label>
-                  <Input name="siteName" defaultValue={initialData.siteName} required className="bg-surface border-white/10 h-12 text-white" />
+                  <Input name="siteName" value={formData.siteName || ""} onChange={handleInputChange} required className="bg-surface border-white/10 h-12 text-white" />
                 </div>
               </div>
             </motion.div>
@@ -132,25 +123,25 @@ export function SettingsForm({ initialData }: { initialData: any }) {
                   <label className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-2 font-white">
                     <Mail className="w-3 h-3" /> Email Resmi
                   </label>
-                  <Input name="email" type="email" defaultValue={initialData.email} required className="bg-surface border-white/10 h-12 text-white" />
+                  <Input name="email" type="email" value={formData.email || ""} onChange={handleInputChange} required className="bg-surface border-white/10 h-12 text-white" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-2">
                     <Phone className="w-3 h-3" /> Telepon Kantor
                   </label>
-                  <Input name="phone" defaultValue={initialData.phone} required className="bg-surface border-white/10 h-12 text-white" />
+                  <Input name="phone" value={formData.phone || ""} onChange={handleInputChange} required className="bg-surface border-white/10 h-12 text-white" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-2">
                     <MessageCircle className="w-3 h-3" /> WhatsApp Admin
                   </label>
-                  <Input name="whatsapp" defaultValue={initialData.whatsapp} required className="bg-surface border-white/10 h-12 text-white" placeholder="Format 62..." />
+                  <Input name="whatsapp" value={formData.whatsapp || ""} onChange={handleInputChange} required className="bg-surface border-white/10 h-12 text-white" placeholder="Format 62..." />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-2">
                     <MapPin className="w-3 h-3" /> Alamat Kantor
                   </label>
-                  <Input name="address" defaultValue={initialData.address} required className="bg-surface border-white/10 h-12 text-white" />
+                  <Input name="address" value={formData.address || ""} onChange={handleInputChange} required className="bg-surface border-white/10 h-12 text-white" />
                 </div>
               </div>
 
@@ -165,12 +156,12 @@ export function SettingsForm({ initialData }: { initialData: any }) {
                     <label className="text-[10px] font-bold text-gray-600 uppercase tracking-widest flex items-center gap-2">
                       <social.icon className="w-3 h-3" /> {social.label} URL
                     </label>
-                    <Input name={social.name} defaultValue={initialData[social.name]} placeholder="https://..." className="bg-surface border-white/10 h-12 text-white" />
+                    <Input name={social.name} value={formData[social.name] || ""} onChange={handleInputChange} placeholder="https://..." className="bg-surface border-white/10 h-12 text-white" />
                   </div>
                 ))}
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold text-gray-600 uppercase tracking-widest">TikTok (Username)</label>
-                  <Input name="tiktok" defaultValue={initialData.tiktok} placeholder="@..." className="bg-surface border-white/10 h-12 text-white" />
+                  <Input name="tiktok" value={formData.tiktok || ""} onChange={handleInputChange} placeholder="@..." className="bg-surface border-white/10 h-12 text-white" />
                 </div>
               </div>
             </motion.div>
@@ -194,19 +185,20 @@ export function SettingsForm({ initialData }: { initialData: any }) {
                   <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Meta Description</label>
                   <Textarea 
                     name="siteDescription" 
-                    defaultValue={initialData.siteDescription} 
+                    value={formData.siteDescription || ""} 
+                    onChange={handleInputChange}
                     className="bg-surface border-white/10 min-h-[120px] text-white" 
                   />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-500 uppercase tracking-widest">Primary Keywords</label>
-                  <Input name="keywords" defaultValue={initialData.keywords} className="bg-surface border-white/10 h-12 text-white" />
+                  <Input name="keywords" value={formData.keywords || ""} onChange={handleInputChange} className="bg-surface border-white/10 h-12 text-white" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-gray-500 uppercase tracking-widest flex items-center gap-2">
                     <Share2 className="w-4 h-4" /> Social Share Image URL
                   </label>
-                  <Input name="ogImage" defaultValue={initialData.ogImage} className="bg-surface border-white/10 h-12 text-white" />
+                  <Input name="ogImage" value={formData.ogImage || ""} onChange={handleInputChange} className="bg-surface border-white/10 h-12 text-white" />
                   <p className="text-[10px] text-gray-600 italic">Gambar default (1200x630) yang muncul saat link website dibagikan.</p>
                 </div>
               </div>

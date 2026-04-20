@@ -8,8 +8,8 @@ export default function AboutPage() {
 
   const milestones = [
     { year: "2011", event: "Anugrah Jaya Desain didirikan di Surakarta oleh Toni Anugrah dengan misi menghadirkan arsitektur berkualitas untuk klien individu." },
-    { year: "2015", event: "Ekspansi layanan ke Desain Interior, mengerjakan proyek perdana di kawasan premium Pondok Indah." },
-    { year: "2018", event: "Membuka divisi Konstruksi Sipil dan Developer, merampungkan proyek cluster perdana di Serpong." },
+    { year: "2015", event: "Ekspansi layanan ke Desain Interior, mengerjakan proyek perdana di kawasan premium Solo Baru." },
+    { year: "2018", event: "Membuka divisi Konstruksi Sipil dan Developer, merampungkan proyek cluster perdana di Colomadu." },
     { year: "2023", event: "Melewati tonggak 150 proyek selesai, dengan kepercayaan klien dari Sabang hingga Papua." },
   ];
 
@@ -25,7 +25,7 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/70 to-transparent" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 w-full">
           <p className="text-primary-gold text-xs font-bold tracking-[0.3em] uppercase mb-4">Anugrah Jaya Desain Studio</p>
-          <h1 className="text-5xl md:text-6xl font-bold text-white">Profil Studio</h1>
+          <h1 className="text-5xl md:text-6xl font-bold text-white">Perjalanan Kami</h1>
         </div>
       </section>
 
@@ -35,7 +35,7 @@ export default function AboutPage() {
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Tentang Anugrah Jaya Desain</h2>
             <p className="text-gray-400 leading-relaxed mb-5">
-              Anugrah Jaya Desain adalah biro arsitek dan kontraktor bangunan yang berbasis di Jakarta. Didirikan pada 2011, kami hadir untuk menjembatani kesenjangan antara kualitas desain arsitektur premium dan keterjangkauan — memastikan setiap klien perorangan bisa memiliki hunian yang dirancang dengan serius dan dibangun dengan integritas.
+              Anugrah Jaya Desain adalah biro arsitek dan kontraktor bangunan yang berbasis di Surakarta. Didirikan pada 2011, kami hadir untuk menjembatani kesenjangan antara kualitas desain arsitektur premium dan keterjangkauan — memastikan setiap klien perorangan bisa memiliki hunian yang dirancang dengan serius dan dibangun dengan integritas.
             </p>
             <p className="text-gray-400 leading-relaxed mb-8">
               Kami menjalankan pendekatan <strong className="text-white">One Service</strong> — satu tim untuk satu proyek, dari awal hingga akhir. Klien tidak perlu berkoordinasi dengan berbagai pihak yang berbeda: arsitek, kontraktor, dan desainer interior kami bekerja dalam satu ekosistem yang sinergis.
@@ -66,7 +66,7 @@ export default function AboutPage() {
       <section className="bg-secondary-dark py-20 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-primary-gold text-xs font-bold tracking-[0.3em] uppercase mb-3 text-center">Perjalanan Kami</p>
-          <h2 className="text-3xl font-bold text-white mb-14 text-center">Sejarah Singkat</h2>
+          <h2 className="text-3xl font-bold text-white mb-14 text-center">Milestones</h2>
           <div className="relative max-w-3xl mx-auto">
             <div className="absolute left-8 top-0 bottom-0 w-px bg-primary-gold/20" />
             <div className="space-y-10">

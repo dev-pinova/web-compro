@@ -7,22 +7,20 @@ import { revalidatePath } from "next/cache";
 
 export async function updateSettings(data: any) {
   try {
-    const values = {
-      siteName: data.siteName || "Anugrah Jaya Desain",
-      email: data.email || "",
-      phone: data.phone || "",
-      address: data.address || "",
-      whatsapp: data.whatsapp || "",
-      siteDescription: data.siteDescription || "",
-      keywords: data.keywords || "",
-      ogImage: data.ogImage || "",
-      instagram: data.instagram || "",
-      facebook: data.facebook || "",
-      tiktok: data.tiktok || "",
-      youtube: data.youtube || "",
-      linkedin: data.linkedin || "",
-      updatedAt: Date.now(),
-    };
+    const values: any = { updatedAt: Date.now() };
+    
+    // Only update fields that are present in the data object
+    const fields = [
+      "siteName", "email", "phone", "address", "whatsapp", 
+      "siteDescription", "keywords", "ogImage", 
+      "instagram", "facebook", "tiktok", "youtube", "linkedin"
+    ];
+
+    fields.forEach(field => {
+      if (data[field] !== undefined && data[field] !== null) {
+        values[field] = data[field];
+      }
+    });
 
     await db
       .insert(siteSettings)
