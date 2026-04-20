@@ -50,7 +50,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const authorInitials = blogPost.author.split(" ").map(n => n[0]).join("").substring(0, 2).toUpperCase();
+  const authorInitials = blogPost.author.split(" ").map((n: string) => n[0]).join("").substring(0, 2).toUpperCase();
 
   return (
     <div className="bg-surface min-h-screen pb-24 text-gray-300">
