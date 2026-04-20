@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { inquiry, portfolio, post } from "@/lib/db/schema";
+import { inquiry, portfolio, post, type Inquiry } from "@/lib/db/schema";
 import { count, desc, sql } from "drizzle-orm";
 import { LayoutDashboard, MessageSquare, ImageIcon, FileText, ArrowUpRight, Clock, User } from "lucide-react";
 import Link from "next/link";
@@ -71,7 +71,7 @@ export default async function AdminDashboard() {
 
             <div className="space-y-4">
                {recentInquiries.length > 0 ? (
-                 recentInquiries.map((iq) => (
+                 recentInquiries.map((iq: Inquiry) => (
                    <div key={iq.id} className="group p-5 bg-white/[0.02] hover:bg-white/[0.05] rounded-2xl border border-white/5 transition-all flex items-center justify-between">
                       <div className="flex items-center gap-4">
                          <div className="w-10 h-10 rounded-full bg-primary-gold/10 flex items-center justify-center text-primary-gold font-bold">
