@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 import { db } from '@/lib/db';
-import { post } from '@/lib/db/schema';
+import { post, type Post } from '@/lib/db/schema';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.BETTER_AUTH_URL || 'http://localhost:3000';
@@ -8,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Get all blog posts - using all columns for compatibility
   const posts = await db.select().from(post);
 
-  const blogUrls = posts.map((p) => ({
+  const blogUrls = posts.map((p: Post) => ({
     url: `${baseUrl}/blog/${p.slug}`,
     lastModified: new Date(p.updatedAt),
   }));
