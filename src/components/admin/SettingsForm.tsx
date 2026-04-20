@@ -20,6 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { updateSettings } from "@/lib/actions";
 import { cn } from "@/lib/utils";
+import { SiteSettings } from "@/lib/db/schema";
 
 const tabs = [
   { id: "identity", label: "Identitas", icon: ShieldCheck },
@@ -27,18 +28,18 @@ const tabs = [
   { id: "seo", label: "SEO & Metadata", icon: Globe },
 ];
 
-export function SettingsForm({ initialData }: { initialData: any }) {
+export function SettingsForm({ initialData }: { initialData: SiteSettings }) {
   const [activeTab, setActiveTab] = useState("identity");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
   // Form State to persist across tab unmounts
-  const [formData, setFormData] = useState({ ...initialData });
+  const [formData, setFormData] = useState<Partial<SiteSettings>>({ ...initialData });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev: any) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

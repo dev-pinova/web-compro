@@ -143,3 +143,4 @@ export type Post = typeof post.$inferSelect;
 export type NewPost = typeof post.$inferInsert;
 export type Testimonial = typeof testimonial.$inferSelect;
 export type NewTestimonial = typeof testimonial.$inferInsert;
+export type SiteSettings = typeof siteSettings.$inferSelect;
