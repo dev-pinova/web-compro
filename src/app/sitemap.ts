@@ -3,7 +3,7 @@ import { db } from '@/lib/db';
 import { post } from '@/lib/db/schema';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://anugrahjayadesain.com'; // Replace with real domain
+  const baseUrl = process.env.BETTER_AUTH_URL || 'http://localhost:3000';
 
   // Get all blog posts - using all columns for compatibility
   const posts = await db.select().from(post);
