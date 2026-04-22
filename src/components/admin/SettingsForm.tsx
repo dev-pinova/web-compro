@@ -157,7 +157,7 @@ export function SettingsForm({ initialData }: { initialData: SiteSettings }) {
                     <label className="text-[10px] font-bold text-gray-600 uppercase tracking-widest flex items-center gap-2">
                       <social.icon className="w-3 h-3" /> {social.label} URL
                     </label>
-                    <Input name={social.name} value={formData[social.name] || ""} onChange={handleInputChange} placeholder="https://..." className="bg-surface border-white/10 h-12 text-white" />
+                    <Input name={social.name} value={(formData[social.name as keyof SiteSettings] as string) || ""} onChange={handleInputChange} placeholder="https://..." className="bg-surface border-white/10 h-12 text-white" />
                   </div>
                 ))}
                 <div className="space-y-2">
