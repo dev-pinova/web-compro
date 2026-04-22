@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, Image as ImageIcon, FileText, MessageSquare, LogOut, Settings, ExternalLink } from "lucide-react";
+import { LayoutDashboard, Image as ImageIcon, FileText, MessageSquare, LogOut, Settings, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { authClient } from "@/lib/auth-client";
@@ -20,6 +20,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const { data: session, isPending } = authClient.useSession();
   const isLoginPage = pathname === "/admin/login";
@@ -57,12 +58,31 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!session) return null;
 
   return (
-    <div className="flex h-screen bg-[#0A0B0C] text-gray-300 overflow-hidden relative">
+    <div className="flex h-screen bg-[#0A0B0C] text-gray-300 overflow-hidden relative w-full">
+      {/* Mobile Sidebar Overlay */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black/80 z-40 md:hidden backdrop-blur-sm" 
+          onClick={() => setIsMobileMenuOpen(false)} 
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 border-r border-white/5 bg-secondary-dark/50 flex flex-col shrink-0 z-50">
-        <div className="p-6 border-b border-white/5 flex items-center gap-3">
-          <div className="w-8 h-8 bg-primary-gold rounded-lg flex items-center justify-center text-surface font-bold">AJ</div>
-          <span className="font-bold text-white tracking-tight">Admin Panel</span>
+      <aside className={cn(
+        "fixed md:static inset-y-0 left-0 w-64 border-r border-white/5 bg-[#0A0B0C] md:bg-secondary-dark/50 flex flex-col shrink-0 z-50 transition-transform duration-300",
+        isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+      )}>
+        <div className="p-6 border-b border-white/5 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-primary-gold rounded-lg flex items-center justify-center text-surface font-bold">AJ</div>
+            <span className="font-bold text-white tracking-tight">Admin Panel</span>
+          </div>
+          <button 
+            className="md:hidden text-gray-400 hover:text-white"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <X className="w-5 h-5" />
+          </button>
         </div>
 
         <nav className="flex-1 p-4 space-y-1 mt-4 overflow-y-auto">
@@ -72,6 +92,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <Link 
                 key={item.href} 
                 href={item.href} 
+                onClick={() => setIsMobileMenuOpen(false)}
                 className={cn(
                   "flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all",
                   isActive 
@@ -101,18 +122,26 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto relative z-0 bg-[#0A0B0C]">
-        <header className="h-16 border-b border-white/5 flex items-center justify-between px-8 bg-surface/50 backdrop-blur-xl sticky top-0 z-40">
-           <h1 className="text-sm font-bold text-white uppercase tracking-widest">
-              {menuItems.find(i => i.href === pathname)?.label || "Dashboard"}
-           </h1>
+      <main className="flex-1 overflow-y-auto relative z-0 bg-[#0A0B0C] w-full">
+        <header className="h-16 border-b border-white/5 flex items-center justify-between px-4 md:px-8 bg-surface/50 backdrop-blur-xl sticky top-0 z-30">
+           <div className="flex items-center gap-3">
+             <button 
+               className="md:hidden p-2 -ml-2 text-gray-400 hover:text-white" 
+               onClick={() => setIsMobileMenuOpen(true)}
+             >
+               <Menu className="w-5 h-5" />
+             </button>
+             <h1 className="text-sm font-bold text-white uppercase tracking-widest hidden sm:block">
+                {menuItems.find(i => i.href === pathname)?.label || "Dashboard"}
+             </h1>
+           </div>
            <div className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-primary-gold/10 border border-primary-gold/20 flex items-center justify-center text-primary-gold text-[10px] font-bold">
                 AD
               </div>
            </div>
         </header>
-        <div className="p-8 pb-32">
+        <div className="p-4 md:p-8 pb-32">
           {children}
         </div>
       </main>
