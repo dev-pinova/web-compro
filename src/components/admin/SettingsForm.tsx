@@ -152,14 +152,17 @@ export function SettingsForm({ initialData }: { initialData: SiteSettings }) {
                   { name: "facebook", icon: LinkIcon, label: "Facebook" },
                   { name: "youtube", icon: LinkIcon, label: "YouTube" },
                   { name: "linkedin", icon: LinkIcon, label: "LinkedIn" },
-                ].map((social) => (
-                  <div key={social.name} className="space-y-2">
-                    <label className="text-[10px] font-bold text-gray-600 uppercase tracking-widest flex items-center gap-2">
-                      <social.icon className="w-3 h-3" /> {social.label} URL
-                    </label>
-                    <Input name={social.name} value={(formData[social.name as keyof SiteSettings] as string) || ""} onChange={handleInputChange} placeholder="https://..." className="bg-surface border-white/10 h-12 text-white" />
-                  </div>
-                ))}
+                ].map((social) => {
+                  const Icon = social.icon;
+                  return (
+                    <div key={social.name} className="space-y-2">
+                      <label className="text-[10px] font-bold text-gray-600 uppercase tracking-widest flex items-center gap-2">
+                        <Icon className="w-3 h-3" /> {social.label} URL
+                      </label>
+                      <Input name={social.name} value={(formData[social.name as keyof SiteSettings] as string) || ""} onChange={handleInputChange} placeholder="https://..." className="bg-surface border-white/10 h-12 text-white" />
+                    </div>
+                  );
+                })}
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold text-gray-600 uppercase tracking-widest">TikTok (Username)</label>
                   <Input name="tiktok" value={formData.tiktok || ""} onChange={handleInputChange} placeholder="@..." className="bg-surface border-white/10 h-12 text-white" />
